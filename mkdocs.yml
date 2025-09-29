@@ -1,0 +1,46 @@
+site_name: FNSUS - Relatórios Situacionais
+site_description: Documentação do sistema de dados para geração de relatórios situacionais dos municípios brasileiros.
+repo_name: FNSUS-DOC
+repo_url: https://github.com/FNSUS/FNSUS-DOC
+
+theme:
+  locale: pt_BR
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: deep blue
+      accent: black
+      background: black
+      text: white
+      code: white
+      toggle:
+        icon: material/toggle-switch
+        name: Modo Claro
+    - scheme: slate
+      primary: deep blue
+      accent: black
+      background: black
+      text: white
+      code: white
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Modo Escuro
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_css:
+  - stylesheets/extra.css
+
+
+nav: 
+  - Sobre: "index.md"
