@@ -1,0 +1,60 @@
+{
+  "fonte": "IBGE",
+  "contexto": "Perfil/dados_gerais",
+  "nivel_geografico": "Município",
+  "nome_chave": "Código do IBGE",
+  "chave": "1234567",
+  "periodo": "Ano",
+  "periodo_valor": "2025", 
+  "JSON": {
+    "codigo_ibge": "1234567",
+    "municipio": "Santa Esperança",
+    "uf": "MG",
+    "estado": "Minas Gerais",
+    "periodo": "Ano",
+    "periodo_valor": "2025", 
+    "dados_gerais": {
+      "area_territorial_km2": 1254.30,
+      "populacao_residente": 45230,
+      "densidade_demografica": "37 hab/km²",
+      "perc_populacao_urbana": 68,
+      "perc_populacao_rural": 32,
+      "distribuicao_populacional": {
+        "homens": {
+          "qtde_0_14": 4200,
+          "qtde_15_59": 13500,
+          "qtde_60_plus": 4800,
+          "total": 22500
+        },
+        "mulheres": {
+          "qtde_0_14": 3900,
+          "qtde_15_59": 14800,
+          "qtde_60_plus": 6000,
+          "total": 24700
+        },
+        "total": {
+          "qtde_0_14": 8100,
+          "qtde_15_59": 28300,
+          "qtde_60_plus": 10800,
+          "total": 47200
+        }
+      }
+    },
+    "infraestrutura": {
+      "qtde_ubs": 2,
+      "qtde_hospitais": 1,
+      "qtde_upas": 1,
+      "qtde_caps": 1,
+      "samu": true,
+      "qtde_leitos_uti": 15,
+      "equipe_saude_familia": true,
+      "perc_cobertura_atencao_basica": 87
+    },
+    "profissionais": {
+      "qtde_tecnicos_enfermagem": 50,
+      "qtde_enfermeiros": 25,
+      "qtde_medicos": 10,
+      "qtde_psicologos": 5
+      }
+  }
+}

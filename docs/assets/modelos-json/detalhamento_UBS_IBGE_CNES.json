@@ -1,0 +1,34 @@
+{
+  "fonte": "IBGE",
+  "contexto": "Perfil/dados_gerais",
+  "nivel_geografico": "Município",
+  "nome_chave": "Código do IBGE",
+  "chave": "1234567",
+  "periodo": "Ano",
+  "periodo_valor": "2025", 
+  "JSON": {
+    "ubs_detalhes": 
+    [
+      {
+        "nome": "UBS Norte",
+        "localizacao": "Centro",
+        "profissionais": {
+          "qtde_tecnicos_enfermagem": 50,
+          "qtde_enfermeiros": 25,
+          "qtde_medicos": 10,
+          "qtde_psicologos": 5
+        }
+      },
+      {
+        "nome": "UBS Sul",
+        "localizacao": "Centro",
+        "profissionais": {
+          "qtde_tecnicos_enfermagem": 50,
+          "qtde_enfermeiros": 25,
+          "qtde_medicos": 10,
+          "qtde_psicologos": 5
+        }
+      }
+    ]
+  }
+}

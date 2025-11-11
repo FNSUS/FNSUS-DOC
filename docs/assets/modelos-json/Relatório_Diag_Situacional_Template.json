@@ -1,0 +1,10 @@
+{
+    "fonte": ["IBGE", "CNES", "SINAN"],
+    "contexto": ["Demografia", "UBS", "Casos"],
+    "nivel_geografico": "Município",
+    "nome_chave": "Código do IBGE",
+    "chave": "1302603",
+    "periodo": ["Semana_Epidemiologica", "Ano"],
+    "periodo_valor": "202501", 
+    "JSON": {} 
+}
