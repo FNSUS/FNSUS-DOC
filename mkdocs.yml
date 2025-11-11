@@ -44,3 +44,9 @@ extra_css:
 
 nav: 
   - Sobre: "index.md"
+  - Dados:
+      - Pipeline de Dados: "dados/modelagem/exemplo-dados.md"
+      - Modelagem de Dados: "dados/modelagem/modelagem.md"
+      - Bases: 
+        - CNES:
+          - PySUS vs Dados Abertos: "dados/bases/cnes/comparacao_estabelecimento.md"
