@@ -1,0 +1,22 @@
+{
+  "fonte": "SINAN",
+  "contexto": "Casos/Dengue",
+  "nivel_geografico": "Município",
+  "nome_chave": "Código do IBGE",
+  "chave": "1234567",
+  "periodo": "Semana_Epidemiologica",
+  "periodo_valor": "202501", 
+  "JSON": {
+    "codigo_ibge": "1234567",
+    "municipio": "Santa Esperança",
+    "uf": "MG",
+    "estado": "Minas Gerais",
+    "periodo": "Semana_Epidemiologica",
+    "periodo_valor": "202501",
+    "doença": "Dengue",
+    "suspeitos": 100,
+    "confirmados": 60,
+    "obitos": 5
+  }
+} 
+

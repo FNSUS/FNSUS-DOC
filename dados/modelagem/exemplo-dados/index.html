@@ -1,0 +1,1343 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do sistema de dados para geração de relatórios situacionais dos municípios brasileiros.">
+      
+      
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../modelagem/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Pipeline de Dados - FNSUS - Relatórios Situacionais</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-blue" data-md-color-accent="black">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentacao-dos-dados-e-pipelines" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="FNSUS - Relatórios Situacionais" class="md-header__button md-logo" aria-label="FNSUS - Relatórios Situacionais" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FNSUS - Relatórios Situacionais
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pipeline de Dados
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-blue" data-md-color-accent="black"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Modo Claro" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-blue" data-md-color-accent="black"  aria-label="Modo Escuro"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Modo Escuro" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/FNSUS/FNSUS-DOC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    FNSUS-DOC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FNSUS - Relatórios Situacionais" class="md-nav__button md-logo" aria-label="FNSUS - Relatórios Situacionais" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    FNSUS - Relatórios Situacionais
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/FNSUS/FNSUS-DOC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    FNSUS-DOC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Sobre
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Dados
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dados" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Dados
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Pipeline de Dados
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Pipeline de Dados
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versoes" class="md-nav__link">
+    Histórico de Versões
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-glossario-de-termos" class="md-nav__link">
+    1. Glossário de Termos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estrutura-dos-pipelines" class="md-nav__link">
+    2. Estrutura dos Pipelines
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Estrutura dos Pipelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-ibge-instituto-brasileiro-de-geografia-e-estatistica" class="md-nav__link">
+    2.1. IBGE (Instituto Brasileiro de Geografia e Estatística)
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. IBGE (Instituto Brasileiro de Geografia e Estatística)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-bronze_localidadepy" class="md-nav__link">
+    2.1.1. bronze_localidade.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-bronze_demografiapy" class="md-nav__link">
+    2.1.2. bronze_demografia.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213-bronze_distribuicaopy" class="md-nav__link">
+    2.1.3. bronze_distribuicao.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214-silver_dados_municipaispy" class="md-nav__link">
+    2.1.4. silver_dados_municipais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cnes-cadastro-nacional-de-estabelecimentos-de-saude" class="md-nav__link">
+    2.2. CNES (Cadastro Nacional de Estabelecimentos de Saúde)
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. CNES (Cadastro Nacional de Estabelecimentos de Saúde)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-bronze_dados_auxiliarespy" class="md-nav__link">
+    2.2.1. bronze_dados_auxiliares.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-bronze_estabelecimentospy" class="md-nav__link">
+    2.2.2. bronze_estabelecimentos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-bronze_profissionaispy" class="md-nav__link">
+    2.2.3. bronze_profissionais.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-bronze_servicospy" class="md-nav__link">
+    2.2.4. bronze_servicos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225-bronze_leitospy" class="md-nav__link">
+    2.2.5. bronze_leitos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226-bronze_tipo_unidadepy" class="md-nav__link">
+    2.2.6. bronze_tipo_unidade.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#227-silver_estabelecimentopy" class="md-nav__link">
+    2.2.7. silver_estabelecimento.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#228-silver_dados_auxiliarespy" class="md-nav__link">
+    2.2.8. silver_dados_auxiliares.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#229-silver_servicopy" class="md-nav__link">
+    2.2.9. silver_servico.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2210-silver_leitospy" class="md-nav__link">
+    2.2.10. silver_leitos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2211-silver_profissionaispy" class="md-nav__link">
+    2.2.11. silver_profissionais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-camada-gold-consumo" class="md-nav__link">
+    2.3. Camada Gold (Consumo)
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Camada Gold (Consumo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-gold_infraestruturapy" class="md-nav__link">
+    2.3.1. gold_infraestrutura.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-gold_profissionaispy" class="md-nav__link">
+    2.3.2. gold_profissionais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-integracao-cnes-ibge" class="md-nav__link">
+    2.4. Integração CNES + IBGE
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. Integração CNES + IBGE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-gold_dados_geraispy" class="md-nav__link">
+    2.4.1. gold_dados_gerais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-consumo" class="md-nav__link">
+    3. Consumo
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelagem/" class="md-nav__link">
+        Modelagem de Dados
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Bases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Bases" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Bases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3_1" type="checkbox" id="__nav_2_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_1" tabindex="0" aria-expanded="false">
+          CNES
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CNES" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          CNES
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bases/cnes/comparacao_estabelecimento/" class="md-nav__link">
+        PySUS vs Dados Abertos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versoes" class="md-nav__link">
+    Histórico de Versões
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-glossario-de-termos" class="md-nav__link">
+    1. Glossário de Termos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estrutura-dos-pipelines" class="md-nav__link">
+    2. Estrutura dos Pipelines
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Estrutura dos Pipelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-ibge-instituto-brasileiro-de-geografia-e-estatistica" class="md-nav__link">
+    2.1. IBGE (Instituto Brasileiro de Geografia e Estatística)
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. IBGE (Instituto Brasileiro de Geografia e Estatística)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-bronze_localidadepy" class="md-nav__link">
+    2.1.1. bronze_localidade.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-bronze_demografiapy" class="md-nav__link">
+    2.1.2. bronze_demografia.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213-bronze_distribuicaopy" class="md-nav__link">
+    2.1.3. bronze_distribuicao.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214-silver_dados_municipaispy" class="md-nav__link">
+    2.1.4. silver_dados_municipais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cnes-cadastro-nacional-de-estabelecimentos-de-saude" class="md-nav__link">
+    2.2. CNES (Cadastro Nacional de Estabelecimentos de Saúde)
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. CNES (Cadastro Nacional de Estabelecimentos de Saúde)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-bronze_dados_auxiliarespy" class="md-nav__link">
+    2.2.1. bronze_dados_auxiliares.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-bronze_estabelecimentospy" class="md-nav__link">
+    2.2.2. bronze_estabelecimentos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-bronze_profissionaispy" class="md-nav__link">
+    2.2.3. bronze_profissionais.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-bronze_servicospy" class="md-nav__link">
+    2.2.4. bronze_servicos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225-bronze_leitospy" class="md-nav__link">
+    2.2.5. bronze_leitos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226-bronze_tipo_unidadepy" class="md-nav__link">
+    2.2.6. bronze_tipo_unidade.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#227-silver_estabelecimentopy" class="md-nav__link">
+    2.2.7. silver_estabelecimento.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#228-silver_dados_auxiliarespy" class="md-nav__link">
+    2.2.8. silver_dados_auxiliares.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#229-silver_servicopy" class="md-nav__link">
+    2.2.9. silver_servico.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2210-silver_leitospy" class="md-nav__link">
+    2.2.10. silver_leitos.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2211-silver_profissionaispy" class="md-nav__link">
+    2.2.11. silver_profissionais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-camada-gold-consumo" class="md-nav__link">
+    2.3. Camada Gold (Consumo)
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Camada Gold (Consumo)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-gold_infraestruturapy" class="md-nav__link">
+    2.3.1. gold_infraestrutura.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-gold_profissionaispy" class="md-nav__link">
+    2.3.2. gold_profissionais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-integracao-cnes-ibge" class="md-nav__link">
+    2.4. Integração CNES + IBGE
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. Integração CNES + IBGE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-gold_dados_geraispy" class="md-nav__link">
+    2.4.1. gold_dados_gerais.py
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-consumo" class="md-nav__link">
+    3. Consumo
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="documentacao-dos-dados-e-pipelines">Documentação dos Dados e Pipelines</h1>
+<h2 id="historico-de-versoes">Histórico de Versões</h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>03/11/2025</td>
+<td>Criação inicial do documento.</td>
+</tr>
+</tbody>
+</table>
+<p>Esta documentação detalha os pipelines de dados do IBGE e CNES (atuais), desde a extração (Bronze) até as camadas de dados transformados (Silver) e prontos para consumo (Gold). O objetivo é fornecer uma visão clara da origem, transformação e estrutura dos dados utilizados.</p>
+<p><a href="https://github.com/FNSUS/api">🔗 Acessar Repositório de Pipeline (Github)</a></p>
+<h2 id="1-glossario-de-termos">1. Glossário de Termos</h2>
+<ul>
+<li><strong>IBGE</strong>: Instituto Brasileiro de Geografia e Estatística.</li>
+<li><strong>CNES</strong>: Cadastro Nacional de Estabelecimentos de Saúde.</li>
+<li><strong>API</strong>: Application Programming Interface - interface de programação de aplicações.</li>
+<li><strong>Pipeline de Dados</strong>: Conjunto de processos automatizados para mover e transformar dados de uma origem para um destino.</li>
+<li><strong>Camada Bronze</strong>: Dados brutos, extraídos diretamente da fonte, sem transformações ou limpezas. Preserva o formato original.</li>
+<li><strong>Camada Silver</strong>: Dados limpos, padronizados e enriquecidos, prontos para análises mais aprofundadas.</li>
+<li><strong>Camada Gold</strong>: Dados agregados e prontos para consumo por aplicações, dashboards ou relatórios.</li>
+<li><strong>JSON</strong>: JavaScript Object Notation - formato de intercâmbio de dados leve e de fácil leitura.</li>
+<li><strong>Parquet</strong>: Formato de armazenamento de dados em coluna otimizado para análises.</li>
+<li><strong>pysus</strong>: Biblioteca Python para acesso e manipulação de dados do SUS.</li>
+<li><strong>FTP</strong>: File Transfer Protocol - protocolo para transferência de arquivos.</li>
+<li><strong>CBO</strong>: Classificação Brasileira de Ocupações.</li>
+</ul>
+<h2 id="2-estrutura-dos-pipelines">2. Estrutura dos Pipelines</h2>
+<h3 id="21-ibge-instituto-brasileiro-de-geografia-e-estatistica">2.1. IBGE (Instituto Brasileiro de Geografia e Estatística)</h3>
+<p>Caminho: <code>pipeline/ibge/</code></p>
+<p>Este pipeline é responsável por coletar e processar dados geográficos e demográficos dos municípios brasileiros, utilizando as APIs do IBGE.</p>
+<h4 id="211-bronze_localidadepy">2.1.1. bronze_localidade.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Extrai informações detalhadas sobre os municípios brasileiros, como nome, microrregião, mesorregião, UF e região, diretamente da API de Localidades do IBGE.</li>
+<li><strong>Fonte</strong>: https://servicodados.ibge.gov.br/api/v1/localidades/municipio</li>
+<li><strong>Formato de Saída (Exemplo)</strong>: JSON</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1100015</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alta Floresta D&#39;Oeste&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;microrregiao&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11006</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cacoal&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;mesorregiao&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1102</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Leste Rondoniense&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;UF&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sigla&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RO&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rondônia&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;regiao&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;sigla&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Norte&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;regiao-imediata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">110005</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cacoal&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;regiao-intermediaria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1102</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ji-Paraná&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;UF&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;sigla&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RO&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rondônia&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;regiao&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;sigla&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Norte&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...continua</span>
+<span class="p">]</span>
+</code></pre></div>
+<h4 id="212-bronze_demografiapy">2.1.2. bronze_demografia.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Coleta dados demográficos dos municípios, especificamente a área territorial em km² e a densidade demográfica (habitantes/km²), utilizando a API de Agregados do IBGE.</li>
+<li><strong>Fonte</strong>: https://servicodados.ibge.gov.br/api/v3/agregados/4714/periodos/{ano}/variaveis/6318|614?localidades=N6[all]</li>
+<li>ID Agregado: 4714 - "População Residente, Área territorial e Densidade demográfica".</li>
+<li>Ano: Último ano do Censo (período).</li>
+<li>Variáveis: 6318 (Área Territorial) e 614 (Densidade Demográfica).</li>
+<li><strong>Observação</strong>: A extração na camada Bronze deve ser pura, sem filtros, para manter a fidelidade aos dados da fonte. O filtro de variáveis (6318|614) já está sendo aplicado na URL, o que é aceitável, pois são as variáveis desejadas daquele agregado específico. A população será obtida de outra fonte mais atualizada.</li>
+<li><strong>Formato de Saída (Exemplo)</strong>: JSON</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;614&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;variavel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Densidade demográfica&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Habitante por quilômetro quadrado&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;resultados&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;classificacoes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nt">&quot;series&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;localidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1100015&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nivel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N6&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Município&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alta Floresta D&#39;Oeste - RO&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;serie&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;2022&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.04&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;localidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1100023&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nivel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N6&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Município&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ariquemes - RO&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;serie&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;2022&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;21.88&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+
+<span class="w">        </span><span class="err">...</span>
+
+<span class="w">        </span><span class="p">{</span>
+<span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;614&quot;</span><span class="p">,</span>
+<span class="nt">&quot;variavel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Densidade demográfica&quot;</span><span class="p">,</span>
+<span class="nt">&quot;unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Habitante por quilômetro quadrado&quot;</span><span class="p">,</span>
+<span class="nt">&quot;resultados&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;classificacoes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">&quot;series&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;localidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1100015&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;nivel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N6&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Município&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alta Floresta D&#39;Oeste - RO&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;serie&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;2022&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.04&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;localidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1100023&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;nivel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N6&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Município&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ariquemes - RO&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;serie&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;2022&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;21.88&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="err">...</span>
+
+<span class="w">      </span><span class="err">(era</span><span class="w"> </span><span class="err">para</span><span class="w"> </span><span class="err">ex</span><span class="kc">tra</span><span class="err">ir</span><span class="w"> </span><span class="err">puro</span><span class="w"> </span><span class="err">e</span><span class="w"> </span><span class="err">viria</span><span class="w"> </span><span class="err">o</span><span class="w"> </span><span class="err">de</span><span class="w"> </span><span class="err">populacao</span><span class="p">,</span><span class="w"> </span><span class="err">mas</span><span class="w"> </span><span class="err">acaba</span><span class="w"> </span><span class="kc">f</span><span class="err">il</span><span class="kc">tran</span><span class="err">do</span><span class="w"> </span><span class="mi">--</span><span class="err">&gt;</span><span class="w"> </span><span class="err">como</span><span class="w"> </span><span class="err">vou</span><span class="w"> </span><span class="err">ex</span><span class="kc">tra</span><span class="err">ir</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">populacao</span><span class="w"> </span><span class="err">por</span><span class="w"> </span><span class="err">ou</span><span class="kc">tr</span><span class="err">o</span><span class="w"> </span><span class="err">meio</span><span class="w"> </span><span class="err">que</span><span class="w"> </span><span class="err">é</span><span class="w"> </span><span class="err">mais</span><span class="w"> </span><span class="err">a</span><span class="kc">tual</span><span class="err">izado</span><span class="p">,</span><span class="w"> </span><span class="kc">fa</span><span class="err">z</span><span class="w"> </span><span class="err">se</span><span class="kc">nt</span><span class="err">ido</span><span class="w"> </span><span class="err">ex</span><span class="kc">tra</span><span class="err">ir</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">requisicao</span><span class="w"> </span><span class="err">pura</span><span class="w"> </span><span class="err">sem</span><span class="w"> </span><span class="kc">f</span><span class="err">il</span><span class="kc">trar</span><span class="p">,</span><span class="w"> </span><span class="err">COMMAND</span><span class="p">:</span><span class="s2">&quot;ANALISE SE NAO PODE FILTRAR MESMO, TEM QUE SER PURO O BRONZE&quot;</span><span class="err">)</span>
+</code></pre></div>
+<h4 id="213-bronze_distribuicaopy">2.1.3. bronze_distribuicao.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Extrai a população residente por situação de domicílio (urbana/rural) dos municípios, utilizando a API de Agregados do IBGE.</li>
+<li><strong>Fonte</strong>: https://servicodados.ibge.gov.br/api/v3/agregados/9923/periodos/{ano}/variaveis/93?localidades=N6[all]&amp;classificacao=1[1,2]</li>
+<li>ID Agregado: 9923 - "População residente, por situação do domicílio".</li>
+<li>Ano: Último ano do Censo (período).</li>
+<li>Variável: 93 - População residente.</li>
+<li>Classificação: 1[1,2] - Situação do domicílio (1: Urbana, 2: Rural).</li>
+<li><strong>Formato de Saída (Exemplo)</strong>: JSON</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;93&quot;</span><span class="p">,</span>
+<span class="nt">&quot;variavel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;População residente&quot;</span><span class="p">,</span>
+<span class="nt">&quot;unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pessoas&quot;</span><span class="p">,</span>
+<span class="nt">&quot;resultados&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;classificacoes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Situação do domicílio&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;categoria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Urbana&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;series&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;localidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1100015&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;nivel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N6&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Município&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alta Floresta D&#39;Oeste - RO&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;serie&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;2022&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12971&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="c1">// ...continua</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="214-silver_dados_municipaispy">2.1.4. silver_dados_municipais.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Responsável por limpar, padronizar e enriquecer os dados brutos do IBGE. Esta camada pode incluir:</li>
+<li>Unificação de dados de localidade, demografia e distribuição populacional.</li>
+<li>Cálculo de percentuais de população urbana/rural.</li>
+<li>Renomeação de colunas para maior clareza.</li>
+<li>Tratamento de valores nulos ou inconsistentes.</li>
+<li><strong>Entradas</strong>: Dados brutos das APIs de Localidades, Demografia e Distribuição Populacional do IBGE.</li>
+<li><strong>Saída Esperada</strong>: Um conjunto de dados limpo e estruturado com informações municipais.</li>
+</ul>
+<h3 id="22-cnes-cadastro-nacional-de-estabelecimentos-de-saude">2.2. CNES (Cadastro Nacional de Estabelecimentos de Saúde)</h3>
+<p>Caminho: <code>pipeline/cnes/</code></p>
+<p>Este pipeline processa dados relacionados a estabelecimentos de saúde, profissionais e serviços, obtidos do CNES.</p>
+<h4 id="221-bronze_dados_auxiliarespy">2.2.1. bronze_dados_auxiliares.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Inicialmente, extraía arquivos CSV de dimensões (tabelas auxiliares). Atualmente, esses arquivos são salvos manualmente em data/bronze.</li>
+<li><strong>Melhoria</strong>: Mudar para extração automatizada via FTP para garantir que os dados estejam sempre atualizados e a solução seja mais robusta.</li>
+<li><strong>Conteúdo Esperado</strong>: Tabelas de mapeamento para códigos (ex: tipo de unidade, CBO, conselhos).</li>
+</ul>
+<h4 id="222-bronze_estabelecimentospy">2.2.2. bronze_estabelecimentos.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Extrai dados dos estabelecimentos de saúde, utilizando o pysus para obter os arquivos mais recentes e complementa com informações da API do CNES para detalhes adicionais (ex: coordenadas geográficas, nome fantasia).</li>
+<li><strong>Fonte (Pysus)</strong>: Arquivos de estabelecimentos do CNES (via pysus).</li>
+<li><strong>Fonte (API Complementar)</strong>: https://apidadosabertos.saude.gov.br/cnes/estabelecimentos/{cnes}</li>
+<li><strong>Observações</strong>: A API complementar pode gerar grandes volumes de dados, exigindo processamento em chunks para evitar problemas de memória/travamento.</li>
+<li><strong>Melhoria</strong>: Avaliar a substituição do pysus por extração via FTP para maior controle e flexibilidade.</li>
+<li><strong>Formato de Saída (Exemplo Pysus - Parquet)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;CNES&quot;:&quot;0153281&quot;,&quot;CODUFMUN&quot;:&quot;120001&quot;,&quot;COD_CEP&quot;:&quot;69945000&quot;,&quot;CPF_CNPJ&quot;:&quot;00000000000000&quot;,&quot;PF_PJ&quot;:&quot;3&quot;,&quot;NIV_DEP&quot;:&quot;3&quot;,&quot;CNPJ_MAN&quot;:&quot;84306737000127&quot;,&quot;COD_IR&quot;:&quot;&quot;,&quot;REGSAUDE&quot;:&quot;&quot;,&quot;MICR_REG&quot;:&quot;&quot;,&quot;DISTRSAN&quot;:&quot;&quot;,&quot;DISTRADM&quot;:&quot;&quot;,&quot;VINC_SUS&quot;:&quot;1&quot;,&quot;TPGESTAO&quot;:&quot;M&quot;,&quot;ESFERA_A&quot;:&quot;&quot;,&quot;RETENCAO&quot;:&quot;&quot;,&quot;ATIVIDAD&quot;:&quot;04&quot;,&quot;NATUREZA&quot;:&quot;&quot;,&quot;CLIENTEL&quot;:&quot;01&quot;,&quot;TP_UNID&quot;:&quot;70&quot;,&quot;TURNO_AT&quot;:&quot;03&quot;,&quot;NIV_HIER&quot;:&quot;&quot;,&quot;TP_PREST&quot;:&quot;99&quot;}
+</code></pre></div>
+<ul>
+<li><strong>Formato de Saída (Exemplo API Complementar - JSON)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;codigo_cnes&quot;</span><span class="p">:</span><span class="mi">153281</span><span class="p">,</span><span class="nt">&quot;numero_cnpj_entidade&quot;</span><span class="p">:</span><span class="s2">&quot;84306737000127&quot;</span><span class="p">,</span><span class="nt">&quot;nome_razao_social&quot;</span><span class="p">:</span><span class="s2">&quot;CENTRO DE ATENCAO PSICOSSOCIAL&quot;</span><span class="p">,</span><span class="nt">&quot;nome_fantasia&quot;</span><span class="p">:</span><span class="s2">&quot;CENTRO DE ATENCAO PSICOSSOCIAL SALVADOR DIAS DA SILVA&quot;</span><span class="p">,</span><span class="nt">&quot;natureza_organizacao_entidade&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;tipo_gestao&quot;</span><span class="p">:</span><span class="s2">&quot;M&quot;</span><span class="p">,</span><span class="nt">&quot;descricao_nivel_hierarquia&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;descricao_esfera_administrativa&quot;</span><span class="p">:</span><span class="s2">&quot;MUNICIPAL&quot;</span><span class="p">,</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="mi">70</span><span class="p">,</span><span class="nt">&quot;codigo_cep_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;69945000&quot;</span><span class="p">,</span><span class="nt">&quot;endereco_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;AVENIDA BRASIL&quot;</span><span class="p">,</span><span class="nt">&quot;numero_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;S/N&quot;</span><span class="p">,</span><span class="nt">&quot;bairro_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;CENTRO&quot;</span><span class="p">,</span><span class="nt">&quot;numero_telefone_estabelecimento&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;latitude_estabelecimento_decimo_grau&quot;</span><span class="p">:</span><span class="mf">-10.0784719111096</span><span class="p">,</span><span class="nt">&quot;longitude_estabelecimento_decimo_grau&quot;</span><span class="p">:</span><span class="mf">-67.0534714562487</span><span class="p">,</span><span class="nt">&quot;endereco_email_estabelecimento&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;numero_cnpj&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;codigo_identificador_turno_atendimento&quot;</span><span class="p">:</span><span class="s2">&quot;03&quot;</span><span class="p">,</span><span class="nt">&quot;descricao_turno_atendimento&quot;</span><span class="p">:</span><span class="s2">&quot;ATENDIMENTOS NOS TURNOS DA MANHA E A TARDE&quot;</span><span class="p">,</span><span class="nt">&quot;estabelecimento_faz_atendimento_ambulatorial_sus&quot;</span><span class="p">:</span><span class="s2">&quot;NAO&quot;</span><span class="p">,</span><span class="nt">&quot;codigo_estabelecimento_saude&quot;</span><span class="p">:</span><span class="s2">&quot;1200010153281&quot;</span><span class="p">,</span><span class="nt">&quot;codigo_uf&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="nt">&quot;codigo_municipio&quot;</span><span class="p">:</span><span class="mi">120001</span><span class="p">,</span><span class="nt">&quot;descricao_natureza_juridica_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;1244&quot;</span><span class="p">,</span><span class="nt">&quot;codigo_motivo_desabilitacao_estabelecimento&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;estabelecimento_possui_centro_cirurgico&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;estabelecimento_possui_centro_obstetrico&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;estabelecimento_possui_centro_neonatal&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;estabelecimento_possui_atendimento_hospitalar&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;estabelecimento_possui_servico_apoio&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;estabelecimento_possui_atendimento_ambulatorial&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;codigo_atividade_ensino_unidade&quot;</span><span class="p">:</span><span class="s2">&quot;04&quot;</span><span class="p">,</span><span class="nt">&quot;codigo_natureza_organizacao_unidade&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;codigo_nivel_hierarquia_unidade&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;codigo_esfera_administrativa_unidade&quot;</span><span class="p">:</span><span class="s2">&quot;M &quot;</span><span class="p">,</span><span class="nt">&quot;data_atualizacao&quot;</span><span class="p">:</span><span class="s2">&quot;2025-09-03&quot;</span><span class="p">}</span>
+</code></pre></div>
+<h4 id="223-bronze_profissionaispy">2.2.3. bronze_profissionais.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Extrai dados dos profissionais de saúde cadastrados, utilizando o pysus para obter os arquivos mais recentes.</li>
+<li><strong>Fonte</strong>: Arquivos de profissionais do CNES (via pysus).</li>
+<li><strong>Observações</strong>:</li>
+<li>Devido ao grande volume de dados, o script utiliza processamento em chunks para evitar travamentos.</li>
+<li><strong>Melhoria Sugerida</strong>: Avaliar a substituição do pysus por extração via FTP.</li>
+<li><strong>Colunas do Parquet (Exemplo)</strong>: CNES, CODUFMUN, REGSAUDE, ..., NAT_JUR</li>
+</ul>
+<h4 id="224-bronze_servicospy">2.2.4. bronze_servicos.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Extrai dados sobre os serviços oferecidos pelos estabelecimentos de saúde, utilizando o pysus para obter os arquivos mais recentes.</li>
+<li><strong>Fonte</strong>: Arquivos de serviços do CNES (via pysus).</li>
+<li><strong>Melhoria Sugerida</strong>: Avaliar a substituição do pysus por extração via FTP.</li>
+<li><strong>Formato de Saída (Exemplo - Parquet)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;CNES&quot;:&quot;0271438&quot;,&quot;CODUFMUN&quot;:&quot;120001&quot;,&quot;SERV_ESP&quot;:&quot;141&quot;,&quot;CLASS_SR&quot;:&quot;001&quot;,&quot;SRVUNICO&quot;:&quot;141&quot;,&quot;TP_UNID&quot;:&quot;50&quot;,&quot;TURNO_AT&quot;:&quot;03&quot;,&quot;AMB_NSUS&quot;:0,&quot;AMB_SUS&quot;:1,&quot;HOSP_NSUS&quot;:0,&quot;HOSP_SUS&quot;:1}
+</code></pre></div>
+<h4 id="225-bronze_leitospy">2.2.5. bronze_leitos.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Extrai dados sobre a quantidade e tipo de leitos disponíveis nos estabelecimentos de saúde, utilizando o pysus para obter os arquivos mais recentes.</li>
+<li><strong>Fonte</strong>: Arquivos de leitos do CNES (via pysus).</li>
+<li><strong>Melhoria Sugerida</strong>: Avaliar a substituição do pysus por extração via FTP.</li>
+<li><strong>Formato de Saída (Exemplo - Parquet)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;CNES&quot;:&quot;5701929&quot;,&quot;CODUFMUN&quot;:&quot;120001&quot;,&quot;REGSAUDE&quot;:&quot;001 &quot;,&quot;MICR_REG&quot;:&quot;&quot;,&quot;DISTRSAN&quot;:&quot;&quot;,&quot;DISTRADM&quot;:&quot;&quot;,&quot;TPGESTAO&quot;:&quot;E&quot;,&quot;PF_PJ&quot;:&quot;3&quot;,&quot;CPF_CNPJ&quot;:&quot;00000000000000&quot;,&quot;NIV_DEP&quot;:&quot;3&quot;,&quot;CNPJ_MAN&quot;:&quot;04034526000143&quot;,&quot;ESFERA_A&quot;:&quot;&quot;,&quot;ATIVIDAD&quot;:&quot;04&quot;,&quot;RETENCAO&quot;:&quot;&quot;,&quot;NATUREZA&quot;:&quot;&quot;,&quot;CLIENTEL&quot;:&quot;03&quot;,&quot;TP_UNID&quot;:&quot;15&quot;,&quot;TURNO_AT&quot;:&quot;06&quot;,&quot;NIV_HIER&quot;:&quot;&quot;,&quot;TERCEIRO&quot;:&quot;&quot;,&quot;TP_LEITO&quot;:&quot;2 &quot;,&quot;CODLEITO&quot;:&quot;33&quot;,&quot;QT_EXIST&quot;:&quot;   3&quot;,&quot;QT_CONTR&quot;:&quot;   0&quot;,&quot;QT_SUS&quot;:&quot;   3&quot;,&quot;QT_NSUS&quot;:&quot;   0&quot;,&quot;COMPETEN&quot;:&quot;202507&quot;,&quot;NAT_JUR&quot;:&quot;1023&quot;}
+</code></pre></div>
+<h4 id="226-bronze_tipo_unidadepy">2.2.6. bronze_tipo_unidade.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Extrai os tipos de unidades de saúde cadastrados no CNES.</li>
+<li><strong>Fonte</strong>: https://apidadosabertos.saude.gov.br/cnes/tipounidades</li>
+<li><strong>Melhoria Sugerida</strong>: Pode ser substituído por extração via FTP, caso um arquivo correspondente esteja disponível.</li>
+<li><strong>Formato de Saída (Exemplo - JSON)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;tipos_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LABORATORIO DE SAUDE PUBLICA&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CENTRAL DE REGULACAO DO ACESSO&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OFICINA ORTOPEDICA&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CENTRAL DE NOTIFICACAO,CAPTACAO E DISTRIB DE ORGAOS ESTADUAL&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNIDADE DE ATENCAO EM REGIME RESIDENCIAL&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POLO ACADEMIA DA SAUDE&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TELESSAUDE&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SERVICO DE ATENCAO DOMICILIAR ISOLADO(HOME CARE)&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CENTRAL DE REGULACAO MEDICA DAS URGENCIAS&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;codigo_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;descricao_tipo_unidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CENTRO DE ATENCAO HEMOTERAPIA E OU HEMATOLOGICA&quot;</span><span class="p">}]}</span>
+</code></pre></div>
+<h4 id="227-silver_estabelecimentopy">2.2.7. silver_estabelecimento.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Limpa e padroniza os dados dos estabelecimentos. Inclui:</li>
+<li>Seleção de colunas relevantes.</li>
+<li>Unificação de dados de estabelecimentos (pysus) com informações complementares da API do CNES.</li>
+<li>Tratamento de valores nulos e padronização de formatos.</li>
+<li>Filtragem por tipos de unidades de saúde de interesse.</li>
+<li><strong>Entradas</strong>: bronze_estabelecimentos.py e bronze_tipo_unidade.py (para mapeamento).</li>
+<li><strong>Saída (Exemplo)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;CNES&quot;</span><span class="p">:</span><span class="s2">&quot;0153281&quot;</span><span class="p">,</span><span class="nt">&quot;CODUFMUN&quot;</span><span class="p">:</span><span class="s2">&quot;120001&quot;</span><span class="p">,</span><span class="nt">&quot;COD_CEP&quot;</span><span class="p">:</span><span class="s2">&quot;69945000&quot;</span><span class="p">,</span><span class="nt">&quot;TP_UNID&quot;</span><span class="p">:</span><span class="s2">&quot;70&quot;</span><span class="p">,</span><span class="nt">&quot;nome_razao_social&quot;</span><span class="p">:</span><span class="s2">&quot;CENTRO DE ATENCAO PSICOSSOCIAL&quot;</span><span class="p">,</span><span class="nt">&quot;nome_fantasia&quot;</span><span class="p">:</span><span class="s2">&quot;CENTRO DE ATENCAO PSICOSSOCIAL SALVADOR DIAS DA SILVA&quot;</span><span class="p">,</span><span class="nt">&quot;endereco_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;AVENIDA BRASIL&quot;</span><span class="p">,</span><span class="nt">&quot;numero_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;S/N&quot;</span><span class="p">,</span><span class="nt">&quot;bairro_estabelecimento&quot;</span><span class="p">:</span><span class="s2">&quot;CENTRO&quot;</span><span class="p">,</span><span class="nt">&quot;latitude_estabelecimento_decimo_grau&quot;</span><span class="p">:</span><span class="mf">-10.078471911109563</span><span class="p">,</span><span class="nt">&quot;longitude_estabelecimento_decimo_grau&quot;</span><span class="p">:</span><span class="mf">-67.05347145624873</span><span class="p">,</span><span class="nt">&quot;numero_telefone_estabelecimento&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="nt">&quot;endereco_email_estabelecimento&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">}</span>
+</code></pre></div>
+<h4 id="228-silver_dados_auxiliarespy">2.2.8. silver_dados_auxiliares.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Filtra e prepara dados auxiliares.</li>
+<li><strong>Revisão</strong>: A observação de que "é desnecessário, pois existe uma tabela de conselho que poderia filtrar pelo conselho desejado" é um ponto crucial. Se o objetivo final é contar profissionais por conselho, a filtragem deve ser baseada nos dados de conselho, e não na CBO. Esta etapa deve focar na criação de dimensões limpas e prontas para junção.</li>
+<li><strong>Entradas</strong>: Dados brutos de dimensões (ex: CBO, Conselhos, etc.).</li>
+<li><strong>Saída (Exemplo - CBOs de Interesse)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;225154&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO ANTROPOSOFICO&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;225355&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO RADIOLOGISTA INTERVENCIONISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;225103&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO INFECTOLOGISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;225105&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO ACUPUNTURISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;225106&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO LEGISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;225109&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO NEFROLOGISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;225110&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO ALERGISTA E IMUNOLOGISTA&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;225112&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEDICO NEUROLOGISTA&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="229-silver_servicopy">2.2.9. silver_servico.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Limpa os dados de serviços, removendo colunas desnecessárias e ajustando formatos.</li>
+<li><strong>Entradas</strong>: bronze_servicos.py.</li>
+<li><strong>Saída (Exemplo)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;CNES&quot;</span><span class="p">:</span><span class="s2">&quot;0153281&quot;</span><span class="p">,</span><span class="nt">&quot;CODUFMUN&quot;</span><span class="p">:</span><span class="s2">&quot;120001&quot;</span><span class="p">,</span><span class="nt">&quot;SERV_ESP&quot;</span><span class="p">:</span><span class="s2">&quot;115&quot;</span><span class="p">,</span><span class="nt">&quot;CLASS_SR&quot;</span><span class="p">:</span><span class="s2">&quot;002&quot;</span><span class="p">,</span><span class="nt">&quot;SRVUNICO&quot;</span><span class="p">:</span><span class="s2">&quot;115&quot;</span><span class="p">,</span><span class="nt">&quot;TP_UNID&quot;</span><span class="p">:</span><span class="s2">&quot;70&quot;</span><span class="p">,</span><span class="nt">&quot;TURNO_AT&quot;</span><span class="p">:</span><span class="s2">&quot;03&quot;</span><span class="p">,</span><span class="nt">&quot;AMB_NSUS&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;AMB_SUS&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;HOSP_NSUS&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;HOSP_SUS&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+</code></pre></div>
+<h4 id="2210-silver_leitospy">2.2.10. silver_leitos.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Limpa os dados de leitos, removendo colunas desnecessárias e ajustando formatos.</li>
+<li><strong>Entradas</strong>: bronze_leitos.py.</li>
+<li><strong>Saída (Exemplo)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;CNES&quot;</span><span class="p">:</span><span class="s2">&quot;5701929&quot;</span><span class="p">,</span><span class="nt">&quot;CODUFMUN&quot;</span><span class="p">:</span><span class="s2">&quot;120001&quot;</span><span class="p">,</span><span class="nt">&quot;TURNO_AT&quot;</span><span class="p">:</span><span class="s2">&quot;06&quot;</span><span class="p">,</span><span class="nt">&quot;TP_LEITO&quot;</span><span class="p">:</span><span class="s2">&quot;2 &quot;</span><span class="p">,</span><span class="nt">&quot;CODLEITO&quot;</span><span class="p">:</span><span class="s2">&quot;33&quot;</span><span class="p">,</span><span class="nt">&quot;QT_SUS&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nt">&quot;QT_NSUS&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+</code></pre></div>
+<h4 id="2211-silver_profissionaispy">2.2.11. silver_profissionais.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Limpa os dados de profissionais, removendo colunas desnecessárias, ajustando formatos e filtrando pelos profissionais de saúde de interesse.</li>
+<li><strong>Entradas</strong>: bronze_profissionais.py e silver_dados_auxiliares.py (para filtros de CBO/Conselho).</li>
+<li><strong>Observação</strong>: A filtragem deve ser cuidadosamente definida para reduzir o volume, possivelmente usando a tabela de conselhos em vez de CBOs individuais para uma abordagem mais escalável.</li>
+<li><strong>Saída (Exemplo)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;CNES&quot;</span><span class="p">:</span><span class="s2">&quot;0153281&quot;</span><span class="p">,</span><span class="nt">&quot;CODUFMUN&quot;</span><span class="p">:</span><span class="s2">&quot;120001&quot;</span><span class="p">,</span><span class="nt">&quot;CBO&quot;</span><span class="p">:</span><span class="s2">&quot;251510&quot;</span><span class="p">,</span><span class="nt">&quot;CNS_PROF&quot;</span><span class="p">:</span><span class="s2">&quot;702009369235087&quot;</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="23-camada-gold-consumo">2.3. Camada Gold (Consumo)</h3>
+<p>Esta camada integra e agrega os dados Silver do IBGE e CNES, criando conjuntos de dados otimizados para consumo final.</p>
+<h4 id="231-gold_infraestruturapy">2.3.1. gold_infraestrutura.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Une informações de estabelecimentos, serviços e leitos do CNES para calcular indicadores de infraestrutura de saúde por município.</li>
+<li><strong>Entradas</strong>: silver_estabelecimento.py, silver_servico.py, silver_leitos.py.</li>
+<li><strong>Saída (Exemplo - por município)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;codigo_ibge&quot;</span><span class="p">:</span><span class="mi">1100015</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_ubs&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_hospitais&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_upas&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_caps&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;samu&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_leitos_uti&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;equipe_saude_familia&quot;</span><span class="p">:</span><span class="s2">&quot;Nao informado&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;perc_cobertura_atencao_basica&quot;</span><span class="p">:</span><span class="s2">&quot;Nao informado&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="232-gold_profissionaispy">2.3.2. gold_profissionais.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Une as informações, faz cálculo de profissionais. Será usado para consumo.</li>
+<li><strong>Saída (Exemplo)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;codigo_ibge&quot;</span><span class="p">:</span><span class="mi">1100015</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;municipio&quot;</span><span class="p">:</span><span class="s2">&quot;Alta Floresta D&#39;Oeste&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;uf&quot;</span><span class="p">:</span><span class="s2">&quot;RO&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_medicos&quot;</span><span class="p">:</span><span class="mi">62</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_enfermeiros&quot;</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_tecnicos_enfermagem&quot;</span><span class="p">:</span><span class="mi">97</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qtde_psicologos&quot;</span><span class="p">:</span><span class="mi">3</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="24-integracao-cnes-ibge">2.4. Integração CNES + IBGE</h3>
+<h4 id="241-gold_dados_geraispy">2.4.1. gold_dados_gerais.py</h4>
+<ul>
+<li><strong>Descrição</strong>: Une as informações, faz cálculo das informações do IBGE. Será usado para consumo.</li>
+<li><strong>Saída (Exemplo)</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;codigo_ibge&quot;</span><span class="p">:</span><span class="mi">1100015</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;municipio&quot;</span><span class="p">:</span><span class="s2">&quot;Alta Floresta D&#39;Oeste&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;uf&quot;</span><span class="p">:</span><span class="s2">&quot;RO&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;estado&quot;</span><span class="p">:</span><span class="s2">&quot;Rondônia&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;regiao&quot;</span><span class="p">:</span><span class="s2">&quot;Norte&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;area_territorial_km2&quot;</span><span class="p">:</span><span class="mf">7067.127</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;densidade_demografica&quot;</span><span class="p">:</span><span class="mf">3.04</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;populacao_total&quot;</span><span class="p">:</span><span class="mi">21494</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;perc_populacao_urbana&quot;</span><span class="p">:</span><span class="mf">60.35</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;perc_populacao_rural&quot;</span><span class="p">:</span><span class="mf">39.65</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="3-consumo">3. Consumo</h2>
+<p>Atualmente o consumo será realizado por uma API que pelo código IBGE do município irá retornar um relatório geral e a partir dele poderá acessar os estabelecimentos ligados ao município.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>

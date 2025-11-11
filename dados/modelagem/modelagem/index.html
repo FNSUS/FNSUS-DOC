@@ -1,0 +1,1772 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do sistema de dados para geração de relatórios situacionais dos municípios brasileiros.">
+      
+      
+      
+      
+        <link rel="prev" href="../exemplo-dados/">
+      
+      
+        <link rel="next" href="../../bases/cnes/comparacao_estabelecimento/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Modelagem de Dados - FNSUS - Relatórios Situacionais</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-blue" data-md-color-accent="black">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#modelagem-dos-dados" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="FNSUS - Relatórios Situacionais" class="md-header__button md-logo" aria-label="FNSUS - Relatórios Situacionais" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FNSUS - Relatórios Situacionais
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Modelagem de Dados
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-blue" data-md-color-accent="black"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Modo Claro" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-blue" data-md-color-accent="black"  aria-label="Modo Escuro"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Modo Escuro" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/FNSUS/FNSUS-DOC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    FNSUS-DOC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FNSUS - Relatórios Situacionais" class="md-nav__button md-logo" aria-label="FNSUS - Relatórios Situacionais" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    FNSUS - Relatórios Situacionais
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/FNSUS/FNSUS-DOC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    FNSUS-DOC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Sobre
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Dados
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dados" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Dados
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exemplo-dados/" class="md-nav__link">
+        Pipeline de Dados
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Modelagem de Dados
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Modelagem de Dados
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versoes" class="md-nav__link">
+    Histórico de Versões
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos" class="md-nav__link">
+    1. Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-visao-geral-atual-mongodb" class="md-nav__link">
+    2. Visão Geral Atual (MongoDB)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-proposta-de-remodelagem-postgresql-data-warehouse" class="md-nav__link">
+    3. Proposta de Remodelagem (PostgreSQL / Data Warehouse)
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Proposta de Remodelagem (PostgreSQL / Data Warehouse)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-analise-de-dados-e-inconsistencias" class="md-nav__link">
+    3.1. Análise de Dados e Inconsistências
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-diagramas-de-modelagem-dimensional" class="md-nav__link">
+    3.2. Diagramas de Modelagem Dimensional
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. Diagramas de Modelagem Dimensional">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-diagrama-conceitual-geral-visao-de-nivel-alto" class="md-nav__link">
+    3.2.1. Diagrama Conceitual Geral (Visão de Nível Alto)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-diagrama-logico-esquema-constelacao-de-fatos" class="md-nav__link">
+    3.2.2. Diagrama Lógico (Esquema Constelação de Fatos)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-dicionario-de-dados-e-descricao-das-tabelas" class="md-nav__link">
+    3.3. Dicionário de Dados e Descrição das Tabelas
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Dicionário de Dados e Descrição das Tabelas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bronzedim_tempo" class="md-nav__link">
+    bronze.dim_tempo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bronzedim_sexo" class="md-nav__link">
+    bronze.dim_sexo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bronzedim_faixa_etaria" class="md-nav__link">
+    bronze.dim_faixa_etaria
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverdim_municipio" class="md-nav__link">
+    silver.dim_municipio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverdim_estabelecimento" class="md-nav__link">
+    silver.dim_estabelecimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverdim_profissional_saude" class="md-nav__link">
+    silver.dim_profissional_saude
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_populacao" class="md-nav__link">
+    silver.fato_populacao
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_estabelecimentos_municipio" class="md-nav__link">
+    silver.fato_estabelecimentos_municipio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_servicos_estabelecimento" class="md-nav__link">
+    silver.fato_servicos_estabelecimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_profissionais_estabelecimento" class="md-nav__link">
+    silver.fato_profissionais_estabelecimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golddm_infraestrutura_municipio_anual" class="md-nav__link">
+    gold.dm_infraestrutura_municipio_anual
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golddm_profissionais_municipio_anual" class="md-nav__link">
+    gold.dm_profissionais_municipio_anual
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Bases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Bases" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Bases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3_1" type="checkbox" id="__nav_2_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_1" tabindex="0" aria-expanded="false">
+          CNES
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CNES" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          CNES
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bases/cnes/comparacao_estabelecimento/" class="md-nav__link">
+        PySUS vs Dados Abertos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versoes" class="md-nav__link">
+    Histórico de Versões
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivos" class="md-nav__link">
+    1. Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-visao-geral-atual-mongodb" class="md-nav__link">
+    2. Visão Geral Atual (MongoDB)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-proposta-de-remodelagem-postgresql-data-warehouse" class="md-nav__link">
+    3. Proposta de Remodelagem (PostgreSQL / Data Warehouse)
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Proposta de Remodelagem (PostgreSQL / Data Warehouse)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-analise-de-dados-e-inconsistencias" class="md-nav__link">
+    3.1. Análise de Dados e Inconsistências
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-diagramas-de-modelagem-dimensional" class="md-nav__link">
+    3.2. Diagramas de Modelagem Dimensional
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. Diagramas de Modelagem Dimensional">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-diagrama-conceitual-geral-visao-de-nivel-alto" class="md-nav__link">
+    3.2.1. Diagrama Conceitual Geral (Visão de Nível Alto)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-diagrama-logico-esquema-constelacao-de-fatos" class="md-nav__link">
+    3.2.2. Diagrama Lógico (Esquema Constelação de Fatos)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-dicionario-de-dados-e-descricao-das-tabelas" class="md-nav__link">
+    3.3. Dicionário de Dados e Descrição das Tabelas
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Dicionário de Dados e Descrição das Tabelas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bronzedim_tempo" class="md-nav__link">
+    bronze.dim_tempo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bronzedim_sexo" class="md-nav__link">
+    bronze.dim_sexo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bronzedim_faixa_etaria" class="md-nav__link">
+    bronze.dim_faixa_etaria
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverdim_municipio" class="md-nav__link">
+    silver.dim_municipio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverdim_estabelecimento" class="md-nav__link">
+    silver.dim_estabelecimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverdim_profissional_saude" class="md-nav__link">
+    silver.dim_profissional_saude
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_populacao" class="md-nav__link">
+    silver.fato_populacao
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_estabelecimentos_municipio" class="md-nav__link">
+    silver.fato_estabelecimentos_municipio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_servicos_estabelecimento" class="md-nav__link">
+    silver.fato_servicos_estabelecimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#silverfato_profissionais_estabelecimento" class="md-nav__link">
+    silver.fato_profissionais_estabelecimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golddm_infraestrutura_municipio_anual" class="md-nav__link">
+    gold.dm_infraestrutura_municipio_anual
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golddm_profissionais_municipio_anual" class="md-nav__link">
+    gold.dm_profissionais_municipio_anual
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="modelagem-dos-dados">Modelagem dos Dados</h1>
+<h2 id="historico-de-versoes">Histórico de Versões</h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>03/11/2025</td>
+<td>Criação inicial do documento.</td>
+</tr>
+</tbody>
+</table>
+<p>Este documento descreve a proposta de remodelagem da camada de armazenamento dos dados do projeto FN-SUS, migrando do atual armazenamento em MongoDB para um Data Warehouse (DW) relacional em PostgreSQL. O DW será estruturado em schemas (Bronze, Silver, Gold) para otimizar a ingestão, processamento e consumo analítico dos dados.</p>
+<h2 id="1-objetivos">1. Objetivos</h2>
+<ul>
+<li><strong>Garantir integridade e normalização dos dados:</strong> Estruturar os dados de forma relacional para manter a consistência e a qualidade.</li>
+<li><strong>Facilitar consultas analíticas e geração de relatórios situacionais:</strong> Otimizar a performance para consultas complexas e a construção de dashboards e APIs, como o JSON de perfil municipal.</li>
+<li><strong>Manter rastreabilidade (proveniência) e versionamento dos dados:</strong> As camadas do DW permitirão rastrear a origem e as transformações dos dados.</li>
+<li><strong>Permitir coexistência da camada de arquivos (raw/bronze) com o DW relacional (silver/gold):</strong> Integrar dados de arquivos brutos no pipeline do DW.</li>
+</ul>
+<h2 id="2-visao-geral-atual-mongodb">2. Visão Geral Atual (MongoDB)</h2>
+<p>Atualmente, os dados seguem um pipeline de arquivos em camadas (bronze, silver, gold), com a persistência final dos artefatos gold em coleções no MongoDB.</p>
+<ul>
+<li><strong>Camada Bronze:</strong> Extrações (parciais, com filtros) em arquivos brutos.</li>
+<li><strong>Camada Silver:</strong> Arquivos pré-processados com colunas selecionadas e junções parciais.</li>
+<li><strong>Camada Gold:</strong> Arquivos finais organizados por domínio (dados gerais, infraestrutura, profissionais).</li>
+<li><strong>Persistência:</strong> Os artefatos gold são importados em coleções no MongoDB.</li>
+</ul>
+<p><strong>Modelos atuais no MongoDB</strong></p>
+<ul>
+<li><a href="https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Estabelecimento.py"><code>Estabelecimento</code></a></li>
+<li><a href="https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Leito.py"><code>Leito</code></a></li>
+<li><a href="https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Municipio.py"><code>Municipio</code></a></li>
+<li><a href="https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Servico.py"><code>Serviço</code></a></li>
+</ul>
+<blockquote>
+<p><a href="../../bases/cnes/comparacao_estabelecimento/">📄 Acessar Comparação entre pysus e API aberta CNES (Página)</a> <br>
+<a href="../../../assets/metadados/DICIONARIO_DE_DADOS.docx">📄 Acessar Dicionário de Dados (DOCX)</a> <br>
+<a href="../../../assets/metadados/IT_CNES_1706.pdf">📄 Acessar Informe Técnico  (PDF)</a></p>
+</blockquote>
+<h2 id="3-proposta-de-remodelagem-postgresql-data-warehouse">3. Proposta de Remodelagem (PostgreSQL / Data Warehouse)</h2>
+<p>A nova arquitetura em PostgreSQL será baseada em um Data Warehouse dimensional com as seguintes camadas, que formam um pipeline de processamento e transformação de dados:</p>
+<p><code>Camada RAW</code></p>
+<ul>
+<li><strong>Sistema de Armazenamento:</strong> Arquivos (ex: S3, sistema de arquivos local).</li>
+<li><strong>Propósito:</strong> Armazenar extrações "puras" dos sistemas de origem, sem filtros ou transformações. Serve como um "landing zone" e registro imutável do dado original.</li>
+<li><strong>Formato:</strong> Variados, de acordo com a origem (CSV, XML, JSON, etc.).</li>
+</ul>
+<p><code>Camada BRONZE</code></p>
+<ul>
+<li><strong>Sistema de Armazenamento:</strong> Arquivos processados (ex: Parquet) e Schema <code>bronze</code> no PostgreSQL.</li>
+<li><strong>Propósito:</strong> Ingestão dos dados da camada RAW para um formato relacional no banco de dados. Realiza normalização de tipos, remoção de registros malformados e padronização básica de nomes de colunas.</li>
+<li><strong>Características:</strong> Assemelha-se aos sistemas de origem, mantendo granularidade original. Tabelas de categoria e lookup (ex: tipo de unidade) são carregadas neste schema para uso como dimensões de referência iniciais.</li>
+<li><strong>Observação:</strong> Grandes volumes de dados brutos e altamente desnormalizados podem ser mantidos como arquivos na camada RAW, sendo lidos diretamente para a camada Silver, sem persistência intermediária no schema <code>bronze</code> do PostgreSQL. O schema <code>bronze</code> no banco de dados será utilizado para dados de categorização e tabelas de referência que requerem normalização imediata.</li>
+</ul>
+<p><code>Camada SILVER</code></p>
+<ul>
+<li><strong>Sistema de Armazenamento:</strong> Schema <code>silver</code> no PostgreSQL.</li>
+<li><strong>Propósito:</strong> Construção do Data Warehouse dimensional principal. Contém tabelas Fato e Dimensão conformes, prontas para análises detalhadas e "self-service BI".</li>
+<li><strong>Características:</strong> Tabelas desnormalizadas (dimensões) e tabelas Fato (com chaves estrangeiras para as dimensões e métricas). Alta granularidade, focada nos processos de negócio (população, vínculos profissionais, infraestrutura de saúde, etc.) a nível de detalhe.</li>
+</ul>
+<p><code>Camada GOLD</code></p>
+<ul>
+<li><strong>Sistema de Armazenamento:</strong> Schema <code>gold</code> no PostgreSQL (Tabelas Materializadas/Data Marts).</li>
+<li><strong>Propósito:</strong> Geração de Data Marts e tabelas altamente agregadas, otimizadas para consumo por aplicações específicas (ex: API de perfil municipal), relatórios de alto nível e dashboards executivos.</li>
+<li><strong>Características:</strong> Tabelas Fato (Data Marts) com granularidade mais alta (resumo por Município e Ano), pré-calculando métricas de várias fontes da Silver. Minimiza a necessidade de joins complexos em tempo de consulta para cenários de uso específicos, garantindo performance de leitura. Requer um processo de ETL para construção e atualização periódica.</li>
+<li><strong>Observação:</strong> Esta camada será modelada com tabelas físicas (Data Marts) para otimização de performance.</li>
+</ul>
+<h3 id="31-analise-de-dados-e-inconsistencias">3.1. Análise de Dados e Inconsistências</h3>
+<p>Um processo importante foi a reanálise dos dados contidos nas bases extraídas. Isso resultou na centralização de informações sobre o CNES em uma planilha, baseada nos documentos oficiais (<a href="../../assets/metadata/IT_CNES_1706.pdf">Disseminação de Informações do CNES</a> e <a href="../../assets/metadata/DICIONARIO_DE_DADOS.docx">Dicionário de Dados do CNES</a>).</p>
+<p>Uma comparação importante foi realizada entre os dados provenientes da biblioteca PySUS e os da API de dados abertos do CNES, detalhada <a href="./bases/cnes/comparacao_estabelecimento.md">aqui</a>.</p>
+<p>Durante a remodelagem, inconsistências foram identificadas, como a desatualização dos dados do IBGE sobre distribuição populacional (rural e urbana), que se refere ao último ano de pesquisa (2022). Para obter quantitativos populacionais mais atuais (por idade e sexo), foi necessário buscar extrações via FTP diretamente no servidor do DataSUS. Essa abordagem via FTP revelou a possibilidade de extrair outros dados diretamente, superando algumas limitações da biblioteca PySUS.</p>
+<p>A análise dos dados do CNES pode ser melhor detalhada na planilha a seguir:</p>
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTutIe_ZQSYUxgyHckM5QlXciipmlIHClzfLlH-ZXwrMR2f5t1mgS06rOSQzJ2N4fHG11y89s-nFhwO/pubhtml?widget=true&amp;headers=false" width="100%" height="600" frameborder="0"></iframe>
+
+<p><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTutIe_ZQSYUxgyHckM5QlXciipmlIHClzfLlH-ZXwrMR2f5t1mgS06rOSQzJ2N4fHG11y89s-nFhwO/pubhtml">🔗 Acessar planilha (Google Planilhas)</a></p>
+<h3 id="32-diagramas-de-modelagem-dimensional">3.2. Diagramas de Modelagem Dimensional</h3>
+<p>Para a construção dos diagramas de modelagem dimensional, foi utilizado o programa brModelo. Os arquivos originais estão disponíveis em anexo.</p>
+<h4 id="321-diagrama-conceitual-geral-visao-de-nivel-alto">3.2.1. Diagrama Conceitual Geral (Visão de Nível Alto)</h4>
+<p>Este diagrama conceitual oferece uma visão macro das principais entidades e seus relacionamentos no contexto do DW. Ele ilustra os domínios de negócio e como eles se interligam.</p>
+<p><img alt="alt text" src="../../../assets/diagramas/conceitual.png" /></p>
+<p><a href="../../../assets/diagramas/conceitual.brM3">📄 Acessar diagrama conceitual (brM3)</a></p>
+<h4 id="322-diagrama-logico-esquema-constelacao-de-fatos">3.2.2. Diagrama Lógico (Esquema Constelação de Fatos)</h4>
+<p>Este diagrama lógico detalha o esquema dimensional proposto, utilizando o modelo de constelação de fatos, que combina múltiplas tabelas Fato (<code>silver.fato_populacao</code>, <code>silver.fato_estabelecimentos_municipio</code>, <code>silver.fato_servicos_estabelecimento</code>, <code>silver.fato_profissionais_estabelecimento</code>) e dimensões conformes (<code>silver.dim_municipio</code>, <code>bronze.dim_tempo</code>, <code>silver.dim_estabelecimento</code>, etc.). Ele representa a estrutura das camadas Silver e Gold em uma visão unificada.</p>
+<p><img alt="alt text" src="../../../assets/diagramas/logico.png" /></p>
+<p><a href="../../../assets/diagramas/logico.brM3">📄 Acessar diagrama lógico (brM3)</a></p>
+<h3 id="33-dicionario-de-dados-e-descricao-das-tabelas">3.3. Dicionário de Dados e Descrição das Tabelas</h3>
+<p>A seguir, um dicionário de dados detalhado para as principais tabelas Fato e Dimensão, com seus atributos, tipos de dados e propósitos.</p>
+<h4 id="bronzedim_tempo"><code>bronze.dim_tempo</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Dimensão criada pelo desenvolvedor para padronizar dados de tempo, focando em granularidade de mês/ano.</li>
+<li><strong>Camada:</strong> BRONZE</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>id_tempo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">PK</td>
+<td align="left">Chave natural da data no formato YYYYMM (ex: 202307).</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>data_completa</code></td>
+<td align="left">DATE</td>
+<td align="left">Atributo</td>
+<td align="left">Data completa (pode ser o primeiro dia do mês).</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>ano</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Atributo</td>
+<td align="left">Ano.</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>mes</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Atributo</td>
+<td align="left">Número do mês (1-12).</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>nome_mes</code></td>
+<td align="left">VARCHAR(20)</td>
+<td align="left">Atributo</td>
+<td align="left">Nome completo do mês (ex: 'Janeiro', 'Julho').</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>abrev_mes</code></td>
+<td align="left">VARCHAR(3)</td>
+<td align="left">Atributo</td>
+<td align="left">Abreviatura do nome do mês (ex: 'JAN', 'JUL').</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>mes_ano</code></td>
+<td align="left">VARCHAR(6)</td>
+<td align="left">Atributo</td>
+<td align="left">String com o mês e ano, conforme campo competência do CNES (ex: '072023').</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+</tbody>
+</table>
+<h4 id="bronzedim_sexo"><code>bronze.dim_sexo</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Dimensão criada pelo desenvolvedor para padronizar as categorias de sexo/gênero.</li>
+<li><strong>Camada:</strong> BRONZE</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>id_sexo</code></td>
+<td align="left">VARCHAR(1)</td>
+<td align="left">PK</td>
+<td align="left">Chave natural do sexo (ex: 'M', 'F', 'I' para Indefinido).</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>ds_sexo</code></td>
+<td align="left">VARCHAR(20)</td>
+<td align="left">Atributo</td>
+<td align="left">Descrição do sexo (ex: 'Masculino', 'Feminino').</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+</tbody>
+</table>
+<h4 id="bronzedim_faixa_etaria"><code>bronze.dim_faixa_etaria</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Dimensão criada pelo desenvolvedor para padronizar as faixas etárias para agregação populacional.</li>
+<li><strong>Camada:</strong> BRONZE</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>id_faixa_etaria</code></td>
+<td align="left">INTEGER</td>
+<td align="left">PK</td>
+<td align="left">Chave natural da faixa etária (ex: 1 para '0 a 14 Anos').</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>ds_faixa_etaria</code></td>
+<td align="left">VARCHAR(50)</td>
+<td align="left">Atributo</td>
+<td align="left">Descrição da faixa etária (ex: '0 a 14 Anos').</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>idade_inicio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Atributo</td>
+<td align="left">Idade mínima da faixa.</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+<tr>
+<td align="left"><code>idade_fim</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Atributo</td>
+<td align="left">Idade máxima da faixa.</td>
+<td align="left">Definido pelo Projeto</td>
+</tr>
+</tbody>
+</table>
+<h4 id="silverdim_municipio"><code>silver.dim_municipio</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Dimensão conforme que descreve os municípios brasileiros, contendo atributos geográficos e demográficos estáticos (do censo).</li>
+<li><strong>Camada:</strong> SILVER</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_municipio</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">PK</td>
+<td align="left">Código IBGE de 7 dígitos do município.</td>
+<td align="left">IBGE - localidade</td>
+</tr>
+<tr>
+<td align="left"><code>nome_municipio</code></td>
+<td align="left">VARCHAR(50)</td>
+<td align="left">Atributo</td>
+<td align="left">Nome oficial do município.</td>
+<td align="left">IBGE - localidade</td>
+</tr>
+<tr>
+<td align="left"><code>uf_sigla</code></td>
+<td align="left">VARCHAR(2)</td>
+<td align="left">Atributo</td>
+<td align="left">Sigla da Unidade da Federação.</td>
+<td align="left">IBGE - localidade</td>
+</tr>
+<tr>
+<td align="left"><code>uf_nome</code></td>
+<td align="left">VARCHAR(50)</td>
+<td align="left">Atributo</td>
+<td align="left">Nome completo da Unidade da Federação.</td>
+<td align="left">IBGE - localidade</td>
+</tr>
+<tr>
+<td align="left"><code>regiao_sigla</code></td>
+<td align="left">VARCHAR(2)</td>
+<td align="left">Atributo</td>
+<td align="left">Sigla da região geográfica (ex: 'SE', 'NE').</td>
+<td align="left">IBGE - localidade</td>
+</tr>
+<tr>
+<td align="left"><code>regiao_nome</code></td>
+<td align="left">VARCHAR(20)</td>
+<td align="left">Atributo</td>
+<td align="left">Nome completo da região geográfica (ex: 'Sudeste', 'Centro-Oeste').</td>
+<td align="left">IBGE - localidade</td>
+</tr>
+<tr>
+<td align="left"><code>ano_censo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Atributo</td>
+<td align="left">Ano de referência do último censo utilizado para dados de área e densidade.</td>
+<td align="left">IBGE - Agregados (Censo)</td>
+</tr>
+<tr>
+<td align="left"><code>area</code></td>
+<td align="left">NUMERIC(10,2)</td>
+<td align="left">Atributo</td>
+<td align="left">Área territorial do município em km².</td>
+<td align="left">IBGE - Agregados (Censo)</td>
+</tr>
+<tr>
+<td align="left"><code>densidade</code></td>
+<td align="left">NUMERIC(10,2)</td>
+<td align="left">Atributo</td>
+<td align="left">Densidade demográfica (população/área).</td>
+<td align="left">IBGE - Agregados (Censo)</td>
+</tr>
+<tr>
+<td align="left"><code>perc_urbano_censo</code></td>
+<td align="left">NUMERIC(5,2)</td>
+<td align="left">Atributo</td>
+<td align="left">Percentual da população urbana (dados do último censo).</td>
+<td align="left">IBGE - Agregados (Censo)</td>
+</tr>
+<tr>
+<td align="left"><code>perc_rural_censo</code></td>
+<td align="left">NUMERIC(5,2)</td>
+<td align="left">Atributo</td>
+<td align="left">Percentual da população rural (dados do último censo).</td>
+<td align="left">IBGE - Agregados (Censo)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="silverdim_estabelecimento"><code>silver.dim_estabelecimento</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Dimensão que descreve os estabelecimentos de saúde, funcionando como um hub para outras dimensões (município, tipo de unidade) e centralizando atributos do estabelecimento.</li>
+<li><strong>Camada:</strong> SILVER</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_cnes</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">PK</td>
+<td align="left">Código CNES do estabelecimento.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>vinculo_sus</code></td>
+<td align="left">BOOLEAN</td>
+<td align="left">Atributo</td>
+<td align="left">Indica se o estabelecimento possui vínculo com o SUS.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>nome_razao_social</code></td>
+<td align="left">VARCHAR(50)</td>
+<td align="left">Atributo</td>
+<td align="left">Nome/Razão Social do estabelecimento.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>nome_fantasia</code></td>
+<td align="left">VARCHAR(50)</td>
+<td align="left">Atributo</td>
+<td align="left">Nome fantasia do estabelecimento.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>latitude</code></td>
+<td align="left">NUMERIC(10,7)</td>
+<td align="left">Atributo</td>
+<td align="left">Latitude geográfica.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>longitude</code></td>
+<td align="left">NUMERIC(10,7)</td>
+<td align="left">Atributo</td>
+<td align="left">Longitude geográfica.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>endereco</code></td>
+<td align="left">VARCHAR(255)</td>
+<td align="left">Atributo</td>
+<td align="left">Endereço completo.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>bairro</code></td>
+<td align="left">VARCHAR(20)</td>
+<td align="left">Atributo</td>
+<td align="left">Bairro.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>cep</code></td>
+<td align="left">VARCHAR(8)</td>
+<td align="left">Atributo</td>
+<td align="left">CEP.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>tp_unidade</code></td>
+<td align="left">VARCHAR(20)</td>
+<td align="left">Atributo</td>
+<td align="left">Tipo de unidade (descrição, ex: "Posto de Saúde", "Hospital Geral").</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>pf_pj</code></td>
+<td align="left">VARCHAR(2)</td>
+<td align="left">Atributo</td>
+<td align="left">Tipo de pessoa do estabelecimento (Física/Jurídica).</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>cpf_cnpj</code></td>
+<td align="left">VARCHAR(14)</td>
+<td align="left">Atributo</td>
+<td align="left">CPF ou CNPJ do estabelecimento.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>turno</code></td>
+<td align="left">VARCHAR(20)</td>
+<td align="left">Atributo</td>
+<td align="left">Regime de turnos do estabelecimento (ex: "24 Horas", "Diurno").</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_leitos_uti</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Atributo</td>
+<td align="left">Quantidade total de leitos de UTI no estabelecimento.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>codigo_municipio</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left"></td>
+<td align="left">Código IBGE de 7 dígitos do município.</td>
+<td align="left">IBGE - localidade</td>
+</tr>
+</tbody>
+</table>
+<h4 id="silverdim_profissional_saude"><code>silver.dim_profissional_saude</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Dimensão que descreve os profissionais de saúde individuais.</li>
+<li><strong>Camada:</strong> SILVER</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_cnes_profissional</code></td>
+<td align="left">VARCHAR(15)</td>
+<td align="left">PK</td>
+<td align="left">Identificador único do profissional no CNES (ex: CNS).</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>nome_profissional</code></td>
+<td align="left">VARCHAR(255)</td>
+<td align="left">Atributo</td>
+<td align="left">Nome completo do profissional.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>categoria</code></td>
+<td align="left">VARCHAR(50)</td>
+<td align="left">Atributo</td>
+<td align="left">Categoria profissional (ex: 'MÉDICO', 'ENFERMEIRO').</td>
+<td align="left">CNES / CBO</td>
+</tr>
+<tr>
+<td align="left"><code>codigo_cnes</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left"></td>
+<td align="left">Código CNES do estabelecimento.</td>
+<td align="left">CNES</td>
+</tr>
+</tbody>
+</table>
+<h4 id="silverfato_populacao"><code>silver.fato_populacao</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Fato que registra a quantidade de população por município, tempo, sexo e faixa etária.</li>
+<li><strong>Camada:</strong> SILVER</li>
+<li><strong>Granularidade:</strong> Município x Ano x Sexo x Faixa Etária</li>
+<li><strong>Chave:</strong> Composta de FKs</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_municipio</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">FK</td>
+<td align="left">Chave Estrangeira para <code>silver.dim_municipio</code>.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>id_tempo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">FK</td>
+<td align="left">Chave Estrangeira para o <code>ano</code> em <code>bronze.dim_tempo</code>.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>id_sexo</code></td>
+<td align="left">VARCHAR(1)</td>
+<td align="left">FK</td>
+<td align="left">Chave Estrangeira para <code>bronze.dim_sexo</code>.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>id_faixa_etaria</code></td>
+<td align="left">INTEGER</td>
+<td align="left">FK</td>
+<td align="left">Chave Estrangeira para <code>bronze.dim_faixa_etaria</code>.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_populacao</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de população para a combinação de dimensões.</td>
+<td align="left">MS (Projeções DATASUS)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="silverfato_estabelecimentos_municipio"><code>silver.fato_estabelecimentos_municipio</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Fato que registra o resumo dos tipos de estabelecimentos de saúde por município e competência.</li>
+<li><strong>Camada:</strong> SILVER</li>
+<li><strong>Granularidade:</strong> Município x Competência (Mês/Ano)</li>
+<li><strong>Chave:</strong> Composta de FKs (PK composta por <code>codigo_municipio</code>, <code>id_tempo</code>)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_municipio</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>silver.dim_municipio</code>. Parte da chave primária composta.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>id_tempo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>bronze.dim_tempo</code> (representando o mês/ano de competência). Parte da chave primária composta.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_caps</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de Centros de Atenção Psicossocial no município na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_ubs</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de Unidades Básicas de Saúde no município na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_hospital</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de Hospitais no município na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_upa</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de Unidades de Pronto Atendimento no município na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+<tr>
+<td align="left"><code>perc_atencao_basica</code></td>
+<td align="left">NUMERIC(5,2)</td>
+<td align="left">Métrica</td>
+<td align="left">Percentual da população coberta pela atenção básica do município na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="silverfato_servicos_estabelecimento"><code>silver.fato_servicos_estabelecimento</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Fato que detalha os serviços e a infraestrutura de saúde oferecidos por cada estabelecimento em uma dada competência.</li>
+<li><strong>Camada:</strong> SILVER</li>
+<li><strong>Granularidade:</strong> Estabelecimento x Competência (Mês/Ano)</li>
+<li><strong>Chave:</strong> Composta de FKs (PK composta por <code>codigo_cnes</code>, <code>id_tempo</code>)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_cnes</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>silver.dim_estabelecimento</code>. Parte da chave primária composta.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>id_tempo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>bronze.dim_tempo</code> (representando o mês/ano de competência). Parte da chave primária composta.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_leitos_uti</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de leitos de UTI (Unidade de Terapia Intensiva) no estabelecimento na competência.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>sus</code></td>
+<td align="left">BOOLEAN</td>
+<td align="left">Métrica</td>
+<td align="left">Indicador se o estabelecimento possui vínculo com o SUS.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>saude_familia</code></td>
+<td align="left">BOOLEAN</td>
+<td align="left">Métrica</td>
+<td align="left">Indicador se o estabelecimento possui equipe de saúde da família.</td>
+<td align="left">CNES</td>
+</tr>
+<tr>
+<td align="left"><code>samu</code></td>
+<td align="left">BOOLEAN</td>
+<td align="left">Métrica</td>
+<td align="left">Indicador se o estabelecimento possui serviço de SAMU.</td>
+<td align="left">CNES</td>
+</tr>
+</tbody>
+</table>
+<h4 id="silverfato_profissionais_estabelecimento"><code>silver.fato_profissionais_estabelecimento</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Fato que registra a quantidade de profissionais de saúde por categoria em cada estabelecimento e competência.</li>
+<li><strong>Camada:</strong> SILVER</li>
+<li><strong>Granularidade:</strong> Estabelecimento x Competência (Mês/Ano)</li>
+<li><strong>Chave:</strong> Composta de FKs (PK composta por <code>codigo_cnes</code>, <code>id_tempo</code>)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_cnes</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>silver.dim_estabelecimento</code>. Parte da chave primária composta.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>id_tempo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>bronze.dim_tempo</code> (representando o mês/ano de competência). Parte da chave primária composta.</td>
+<td align="left">DW</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_psicologo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de psicólogos ativos no estabelecimento na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_medico</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de médicos ativos no estabelecimento na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_tec_enfermagem</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de técnicos de enfermagem ativos no estabelecimento na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+<tr>
+<td align="left"><code>qtde_enfermeiro</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Quantidade de enfermeiros ativos no estabelecimento na competência.</td>
+<td align="left">CNES (agregado)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="golddm_infraestrutura_municipio_anual"><code>gold.dm_infraestrutura_municipio_anual</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Data Mart que consolida métricas de infraestrutura de saúde por município e ano, agregando dados de <code>silver.fato_estabelecimentos_municipio</code> e <code>silver.fato_servicos_estabelecimento</code>.</li>
+<li><strong>Camada:</strong> GOLD</li>
+<li><strong>Granularidade:</strong> Município x Ano</li>
+<li><strong>Chave:</strong> Composta de FKs (PK composta por <code>codigo_municipio</code>, <code>id_tempo</code>)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_municipio</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>silver.dim_municipio</code>. Parte da chave primária composta.</td>
+<td align="left"><code>silver.dim_municipio</code></td>
+</tr>
+<tr>
+<td align="left"><code>id_tempo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>bronze.dim_tempo</code> (representando o ano). Parte da chave primária composta.</td>
+<td align="left"><code>bronze.dim_tempo</code></td>
+</tr>
+<tr>
+<td align="left"><code>qtde_ubs_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de UBS no município no ano (agregado de <code>silver.fato_estabelecimentos_municipio</code>).</td>
+<td align="left">Agregado <code>silver.fato_estabelecimentos_municipio</code></td>
+</tr>
+<tr>
+<td align="left"><code>qtde_hospitais_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de Hospitais no município no ano (agregado de <code>silver.fato_estabelecimentos_municipio</code>).</td>
+<td align="left">Agregado <code>silver.fato_estabelecimentos_municipio</code></td>
+</tr>
+<tr>
+<td align="left"><code>qtde_upas_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de UPAs no município no ano (agregado de <code>silver.fato_estabelecimentos_municipio</code>).</td>
+<td align="left">Agregado <code>silver.fato_estabelecimentos_municipio</code></td>
+</tr>
+<tr>
+<td align="left"><code>qtde_caps_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de CAPS no município no ano (agregado de <code>silver.fato_estabelecimentos_municipio</code>).</td>
+<td align="left">Agregado <code>silver.fato_estabelecimentos_municipio</code></td>
+</tr>
+<tr>
+<td align="left"><code>perc_atencao_basica_municipio</code></td>
+<td align="left">NUMERIC(5,2)</td>
+<td align="left">Métrica</td>
+<td align="left">Percentual da população coberta pela atenção básica do município no ano (agregado de <code>silver.fato_estabelecimentos_municipio</code>).</td>
+<td align="left">Agregado <code>silver.fato_estabelecimentos_municipio</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_leitos_uti_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma total de leitos de UTI no município no ano (agregado de <code>silver.fato_servicos_estabelecimento</code>).</td>
+<td align="left">Agregado <code>silver.fato_servicos_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_estabelecimentos_sus_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Contagem de estabelecimentos com vínculo SUS no município no ano (agregado de <code>silver.fato_servicos_estabelecimento</code> onde <code>sus = TRUE</code>).</td>
+<td align="left">Agregado <code>silver.fato_servicos_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_estabelecimentos_saude_familia_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Contagem de estabelecimentos com equipe de Saúde da Família no município no ano (agregado de <code>silver.fato_servicos_estabelecimento</code> onde <code>saude_familia = TRUE</code>).</td>
+<td align="left">Agregado <code>silver.fato_servicos_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_estabelecimentos_samu_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Contagem de estabelecimentos com serviço SAMU no município no ano (agregado de <code>silver.fato_servicos_estabelecimento</code> onde <code>samu = TRUE</code>).</td>
+<td align="left">Agregado <code>silver.fato_servicos_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_estabelecimentos_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Contagem total de estabelecimentos de saúde no município no ano.</td>
+<td align="left">Agregado <code>silver.dim_estabelecimento</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="golddm_profissionais_municipio_anual"><code>gold.dm_profissionais_municipio_anual</code></h4>
+<ul>
+<li><strong>Propósito:</strong> Data Mart que consolida métricas de profissionais de saúde por município e ano, agregando dados de <code>silver.fato_profissionais_estabelecimento</code> e <code>silver.fato_populacao</code>.</li>
+<li><strong>Camada:</strong> GOLD</li>
+<li><strong>Granularidade:</strong> Município x Ano</li>
+<li><strong>Chave:</strong> Composta de FKs (PK composta por <code>codigo_municipio</code>, <code>id_tempo</code>)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Nome da Coluna</th>
+<th align="left">Tipo de Dado (PostgreSQL)</th>
+<th align="left">Propriedades do atributo</th>
+<th align="left">Descrição</th>
+<th align="left">Origem (Exemplo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>codigo_municipio</code></td>
+<td align="left">VARCHAR(7)</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>silver.dim_municipio</code>. Parte da chave primária composta.</td>
+<td align="left"><code>silver.dim_municipio</code></td>
+</tr>
+<tr>
+<td align="left"><code>id_tempo</code></td>
+<td align="left">INTEGER</td>
+<td align="left">PK, FK</td>
+<td align="left">Chave Estrangeira para <code>bronze.dim_tempo</code> (representando o ano). Parte da chave primária composta.</td>
+<td align="left"><code>bronze.dim_tempo</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_profissionais_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma total de profissionais ativos no município no ano (agregado de <code>silver.fato_profissionais_estabelecimento</code>).</td>
+<td align="left">Agregado <code>silver.fato_profissionais_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_enfermeiros_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de enfermeiros ativos no município no ano (agregado de <code>silver.fato_profissionais_estabelecimento</code>).</td>
+<td align="left">Agregado <code>silver.fato_profissionais_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_tecnicos_enfermagem_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de técnicos de enfermagem ativos no município no ano (agregado de <code>silver.fato_profissionais_estabelecimento</code>).</td>
+<td align="left">Agregado <code>silver.fato_profissionais_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_medicos_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de médicos ativos no município no ano (agregado de <code>silver.fato_profissionais_estabelecimento</code>).</td>
+<td align="left">Agregado <code>silver.fato_profissionais_estabelecimento</code></td>
+</tr>
+<tr>
+<td align="left"><code>total_psicologos_municipio</code></td>
+<td align="left">INTEGER</td>
+<td align="left">Métrica</td>
+<td align="left">Soma de psicólogos ativos no município no ano (agregado de <code>silver.fato_profissionais_estabelecimento</code>).</td>
+<td align="left">Agregado <code>silver.fato_profissionais_estabelecimento</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>
