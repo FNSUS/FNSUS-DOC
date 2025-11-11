@@ -24,10 +24,10 @@ Atualmente, os dados seguem um pipeline de arquivos em camadas (bronze, silver, 
 
 **Modelos atuais no MongoDB**
 
-* [`Estabelecimento`](docs/dados/modelagem/models-mongoDB/Estabelecimento.py)
-* [`Leito`](docs/dados/modelagem/models-mongoDB/Leito.py)
-* [`Municipio`](docs/dados/modelagem/models-mongoDB/Municipio.py)
-* [`Profissional`](docs/dados/modelagem/models-mongoDB/Profissional.py)
+* [`Estabelecimento`](https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Estabelecimento.py)
+* [`Leito`](https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Leito.py)
+* [`Municipio`](https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Municipio.py)
+* [`Serviço`](https://github.com/FNSUS/FNSUS-DOC/blob/main/docs/dados/modelagem/models-mongoDB/Servico.py)
 
 > [📄 Acessar Comparação entre pysus e API aberta CNES (Página)](../bases/cnes/comparacao_estabelecimento.md) <br>
 > [📄 Acessar Dicionário de Dados (DOCX)](../../assets/metadados/DICIONARIO_DE_DADOS.docx) <br>
